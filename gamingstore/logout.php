@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-$connect = mysqli_connect("localhost", "root", "", "storedb");
+require 'config.php';
 
 $email = $_POST['email'];
 

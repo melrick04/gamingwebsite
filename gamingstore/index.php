@@ -317,8 +317,18 @@ require 'config.php';
 
                 $.ajax({
 
-                    url: action.php,
-                    method: POST,
+                    url: "action.php",
+                    method: "POST",
+                    data: {
+                        action: action,
+                        product_type: product_type
+                    },
+                    success: function(response) {
+                        $("#result").html(response);
+                        $("#loader").hide();
+                        $("#textChange").text("Filtered Products");
+
+                    }
 
                 });
 
