@@ -22,7 +22,7 @@ require 'config.php';
     <!--google font-->
     <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
     <!--font awesome-->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/all.min.css">
     <!--my css-->
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -35,7 +35,7 @@ require 'config.php';
     <header>
 
         <div class="navbar">
-            <h4 style="color: white;">Games Store</h4>
+            <h4>Games Store</h4>
             <ul class=" nav justify-content-end">
 
                 <?php
@@ -61,17 +61,27 @@ require 'config.php';
                 ?>
             </ul>
         </div>
-        </nav>
 
     </header>
 
-    <h3 class="text-center " style="color: white;">My Shop</h3>
+
+    <h3 class="text-center ">My Shop</h3>
+    <ul class="nav justify-content-end">
+        <li class="nav-item ">
+            <a class="nav-link" href="checkout.php">Chekout</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" href="cart.php"><i class="fas fa-shopping-cart"></i>Cart<span id="cart-item" class="badge badge-danger"></span></a>
+        </li>
+    </ul>
     <br>
     <br>
+
     <div class="container-fluid">
+        <!--<div id="message"></div>-->
         <div class="row">
             <div class="col-lg-3">
-                <h5 style="color: white;">Filter Products</h5>
+                <h5>Filter Products</h5>
                 <hr color="white">
                 <h6 class="text-info">Select type</h6>
                 <ul class="list-group">
@@ -93,11 +103,10 @@ require 'config.php';
                     }
                     ?>
                 </ul>
-
-
             </div>
+
             <div class="col-lg-9">
-                <h5 style="color: white;" class="text-center" id="textChange">All Products</h5>
+                <h5 class="text-center" id="textChange">All Products</h5>
                 <hr color="white">
                 <div class="text-center">
                     <img src="img/loader.svg" id="loader" width="150" style="display:none;">
@@ -109,18 +118,24 @@ require 'config.php';
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) {
                     ?>
-                        <div class="col-md-3 mb-2">
+                        <div class="col-sm-6 col-md-3 col-lg-3 mb-2">
                             <div class="card-deck ">
-                                <div class="card border-secondary">
+                                <div class="card p-2 border-secondary mb-2">
                                     <img src="<?= $row['product_image']; ?>" class="card-img-top" height="400px">
-                                    <div class="card-img-overlay">
-                                        <h6 style="margin-top:370px;" class="text-dark bg-danger text-center rounded p-1 "><?= $row['product_name']; ?></h6>
+                                    <div class="card-body text-center p-3">
+                                        <h6 class="card-title bg-danger text-center rounded p-1 "><?= $row['product_name']; ?></h6>
+                                        <h4 class="card-text text-center text-danger">Price :&nbsp;&nbsp;<i class="fas fa-rupee-sign"></i> <?= number_format($row['product_price']); ?>/-</h4>
                                     </div>
-                                    <br>
-                                    <div class="card-body">
-                                        <h4 class="card-title text-danger">Price : <?= number_format($row['product_price']); ?>/-</h4>
-                                        <br>
-                                        <a href="#" class="btn btn-success btn-block">Add To Cart</a>
+                                    <div class="card-footer p-2">
+                                        <form action="" class="form-submit">
+                                            <input type="hidden" class="product_id" value="<?= $row['product_id'] ?>">
+                                            <input type="hidden" class="product_name" value="<?= $row['product_name'] ?>">
+                                            <input type="hidden" class="product_type" value="<?= $row['product_type'] ?>">
+                                            <input type="hidden" class="product_price" value="<?= $row['product_price'] ?>">
+                                            <input type="hidden" class="product_image" value="<?= $row['product_image'] ?>">
+                                            <input type="hidden" class="product_code" value="<?= $row['product_code'] ?>">
+                                            <button class="btn btn-success btn-block addItemBtn"><i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;&nbsp;Add To Cart</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -133,8 +148,6 @@ require 'config.php';
             </div>
         </div>
     </div>
-
-
 
 
 
@@ -340,6 +353,64 @@ require 'config.php';
                     filterData.push($(this).val());
                 });
                 return filterData;
+            }
+
+            $(".addItemBtn").click(function(e) {
+                e.preventDefault();
+
+                var $form = $(this).closest(".form-submit");
+                var product_id = $form.find(".product_id").val();
+                var product_name = $form.find(".product_name").val();
+                var product_type = $form.find(".product_type").val();
+                var product_price = $form.find(".product_price").val();
+                var product_image = $form.find(".product_image").val();
+                var product_code = $form.find(".product_code").val();
+
+                $.ajax({
+
+                    url: 'addtocart.php',
+                    method: 'POST',
+                    data: {
+                        product_id: product_id,
+                        product_name: product_name,
+                        product_type: product_type,
+                        product_price: product_price,
+                        product_image: product_image,
+                        product_code: product_code
+                    },
+                    success: function(response) {
+                        if (response == 'no') {
+                            alert("Item already in cart!");
+                        } else {
+                            alert("Item added to cart!");
+                            load_cart_item_number();
+                        }
+                        /*
+                        $("#message").html(response);
+                        load_cart_item_number();
+                        */
+
+
+                    }
+
+                });
+            });
+
+            load_cart_item_number();
+
+            function load_cart_item_number() {
+
+                $.ajax({
+                    url: 'addtocart.php',
+                    method: 'GET',
+                    data: {
+                        cartItem: "cart_item"
+                    },
+                    success: function(response) {
+                        $("#cart-item").html(response);
+                    }
+                });
+
             }
 
         });
