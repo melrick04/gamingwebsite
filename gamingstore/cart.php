@@ -66,13 +66,14 @@ require 'config.php';
     </header>
 
 
-    <h3 class="text-center ">My Shop</h3>
+    <h3 style="color: yellow;" class="text-center ">Cart!</h3>
+
     <ul class="nav justify-content-end">
         <li class="nav-item ">
-            <a class="nav-link" href="index.php">Products</a>
+            <a class="nav-link" href="index.php">Home</a>
         </li>
         <li class="nav-item ">
-            <a class="nav-link" href="checkout.php">Chekout</a>
+            <a class="nav-link" href="product.php">Products</a>
         </li>
         <li class="nav-item ">
             <a class="nav-link active" href="cart.php"><i class="fas fa-shopping-cart"></i>Cart<span id="cart-item" class="badge badge-danger"></span></a>
@@ -145,7 +146,7 @@ require 'config.php';
                             <?php endwhile; ?>
                             <tr>
                                 <td colspan="4">
-                                    <a href="index.php" class="btn btn-warning"><i class="fas fa-cart-plus">&nbsp;&nbsp;&nbsp;</i>Continue Shopping!</a>
+                                    <a href="product.php" class="btn btn-warning"><i class="fas fa-cart-plus">&nbsp;&nbsp;&nbsp;</i>Continue Shopping!</a>
                                 </td>
                                 <td colspan="2"><b>Grand Total</b></td>
                                 <td><b><i class="fas fa-rupee-sign"></i>&nbsp;<?= number_format($grand_total); ?></b></td>

@@ -58,13 +58,13 @@ $allItems = implode(",", $items);
     </header>
 
 
-    <h3 class="text-center ">My Shop</h3>
+
     <ul class="nav justify-content-end">
         <li class="nav-item ">
-            <a class="nav-link" href="index.php">Products</a>
+            <a class="nav-link" href="index.php">Home</a>
         </li>
         <li class="nav-item ">
-            <a class="nav-link active" href="checkout.php">Chekout</a>
+            <a class="nav-link active" href="product.php">Products</a>
         </li>
         <li class="nav-item ">
             <a class="nav-link" href="cart.php"><i class="fas fa-shopping-cart"></i>Cart<span id="cart-item" class="badge badge-danger"></span></a>

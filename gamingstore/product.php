@@ -67,10 +67,10 @@ require 'config.php';
     </header>
     <ul class="nav justify-content-end">
         <li class="nav-item ">
-            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link active" href="index.php">Home</a>
         </li>
         <li class="nav-item ">
-            <a class="nav-link" href="product.php">Products</a>
+            <a class="nav-link" href="#products">Products</a>
         </li>
         <li class="nav-item ">
             <a class="nav-link" href="cart.php"><i class="fas fa-shopping-cart"></i>Cart<span id="cart-item" class="badge badge-danger"></span></a>
@@ -78,94 +78,68 @@ require 'config.php';
     </ul>
 
 
-    <div id="mycarousel" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#mycarousel" data-slide-to="1"></li>
-            <li data-target="#mycarousel" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="img/pc.jpg" class="d-block w-100" alt="pc">
-            </div>
-            <div class="carousel-item">
-                <img src="img/ps4.jpg" class="d-block w-100" alt="ps">
-            </div>
-            <div class="carousel-item">
-                <img src="img/csgo.jpg" class="d-block w-100" alt="xbox">
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#mycarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#mycarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-    <br>
-
-    <div class="container-fluid ">
-
-        <div id="wrapper">
-
-            <h2 style="text-align: center; color:white">New Games</h2>
-            <br>
-
-            <div class="col-lg-12 ">
-
-                <div class="row justify-content-center " id="result">
+    <div class="container-fluid">
+        <div class="products" id="products"></div>
+        <div class="row">
+            <div class="col-lg-3">
+                <h5 style="color: white;">Filter Products</h5>
+                <hr color="white">
+                <h6 class="text-info">Select type</h6>
+                <ul class="list-group">
                     <?php
-                    $sql = "SELECT * FROM product WHERE stat='new' ";
+                    $sql = "SELECT DISTINCT product_type FROM product ORDER BY product_type";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) {
                     ?>
-                        <div class="col-sm-6 col-md-3 col-lg-3 mb-2">
-                            <div class="card-deck ">
-                                <div class="card p-2 border-secondary mb-2">
-                                    <img src="<?= $row['product_image']; ?>" class="card-img-top" height="400px">
-                                    <div class="card-body text-center p-3">
-                                        <h6 class="card-title bg-danger text-center rounded p-1 "><?= $row['product_name']; ?></h6>
-                                        <h6 class="card-text text-left text-info">Game Type:&nbsp;&nbsp;<?= $row['product_type']; ?></h6>
-                                        <h5 class="card-text text-left text-info">Price :&nbsp;&nbsp;<i class="fas fa-rupee-sign"></i> <?= number_format($row['product_price']); ?>/-</h5>
-                                    </div>
-                                    <div class="card-footer p-2">
-                                        <form action="" class="form-submit">
-                                            <input type="hidden" class="product_id" value="<?= $row['product_id'] ?>">
-                                            <input type="hidden" class="product_name" value="<?= $row['product_name'] ?>">
-                                            <input type="hidden" class="product_type" value="<?= $row['product_type'] ?>">
-                                            <input type="hidden" class="product_price" value="<?= $row['product_price'] ?>">
-                                            <input type="hidden" class="product_image" value="<?= $row['product_image'] ?>">
-                                            <input type="hidden" class="product_code" value="<?= $row['product_code'] ?>">
-                                            <button class="btn btn-success btn-block addItemBtn"><i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;&nbsp;Add To Cart</button>
-                                        </form>
-                                    </div>
-                                </div>
+                        <li class="list-group-item">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input product_check" value="<?= $row['product_type']; ?>" id="product_type"><?= $row['product_type']; ?>
+
+                                </label>
                             </div>
-                        </div>
+
+                        </li>
                     <?php
                     }
                     ?>
+                </ul>
 
-                </div>
+                <br>
+
+                <h6 class="text-info">Select genre</h6>
+                <ul class="list-group">
+                    <?php
+                    $sql = "SELECT DISTINCT genre FROM product ORDER BY genre";
+                    $result = $conn->query($sql);
+                    while ($row = $result->fetch_assoc()) {
+                    ?>
+                        <li class="list-group-item">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input product_check" value="<?= $row['genre']; ?>" id="genre"><?= $row['genre']; ?>
+
+                                </label>
+                            </div>
+
+                        </li>
+                    <?php
+                    }
+                    ?>
+                </ul>
+
             </div>
-        </div>
-    </div>
-    <br>
 
-    <div class="container-fluid">
-
-        <div id="wrapper">
-
-            <h2 style="text-align: center; color:white">Featured Games</h2>
-            <br>
-
-            <div class="col-lg-12 ">
+            <div class="col-lg-9">
+                <h5 style="color: white;" class="text-center" id="textChange">All Products</h5>
+                <hr color="white">
+                <div class="text-center">
+                    <img src="img/loader.svg" id="loader" width="150" style="display:none;">
+                </div>
 
                 <div class="row" id="result">
                     <?php
-                    $sql = "SELECT * FROM product WHERE stat='featured' ";
+                    $sql = "SELECT * FROM product";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) {
                     ?>
@@ -200,6 +174,7 @@ require 'config.php';
             </div>
         </div>
     </div>
+
 
 
     <div class="modal fade" id="loginmodal">
@@ -389,16 +364,18 @@ require 'config.php';
             $(".product_check").click(function() {
                 $("#loader").show();
 
-                var action = 'data';
+                var filter = 'data';
                 var product_type = get_filter_text('product_type');
+                var genre = get_filter_text('genre');
 
                 $.ajax({
 
-                    url: "filter.php",
+                    url: "action.php",
                     method: "POST",
                     data: {
-                        action: action,
-                        product_type: product_type
+                        filter: filter,
+                        product_type: product_type,
+                        genre: genre
                     },
                     success: function(response) {
                         $("#result").html(response);

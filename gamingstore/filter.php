@@ -2,12 +2,17 @@
 
 require 'config.php';
 
-if (isset($_POST['action'])) {
+if (isset($_POST['filter'])) {
     $sql = " SELECT * FROM product WHERE product_type !='' ";
 
     if (isset($_POST['product_type'])) {
         $product_type = implode("','", $_POST['product_type']);
         $sql .= "AND product_type IN('" . $product_type . "')";
+    }
+
+    if (isset($_POST['genre'])) {
+        $genre = implode("','", $_POST['genre']);
+        $sql .= "AND genre IN('" . $genre . "')";
     }
 
     $result = $conn->query($sql);
