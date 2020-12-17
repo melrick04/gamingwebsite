@@ -26,8 +26,9 @@ if (isset($_POST['filter'])) {
                 <div class="card p-2 border-secondary mb-2">
                     <img src="' . $row['product_image'] . '" class="card-img-top" height="400px">
                     <div class="card-body text-center p-3">
-                        <h6 class="card-title bg-danger text-center rounded p-1 ">' . $row['product_name'] . '</h6>
-                        <h4 class="card-text text-center text-danger">Price :&nbsp;&nbsp;<i class="fas fa-rupee-sign"></i> ' . number_format($row['product_price']) . '/-</h4>
+                    <h6 class="card-title bg-danger text-center rounded p-1 ">' . $row['product_name'] . '</h6>
+                    <h6 class="card-text text-left text-info">Game Type:&nbsp;&nbsp;' . $row['product_type'] . '</h6>
+                    <h5 class="card-text text-left text-info">Price :&nbsp;&nbsp;<i class="fas fa-rupee-sign"></i> ' . number_format($row['product_price']) . '/-</h5>
                     </div>
                     <div class="card-footer p-2">
                          <form action="" class="form-submit">

@@ -52,7 +52,30 @@ $allItems = implode(",", $items);
             <a href="index.php">
                 <img src="img/logo.jpg" id="logo">
             </a>
+            <ul class=" nav justify-content-end">
 
+                <?php
+                if (isset($_SESSION["email"])) {
+                ?>
+
+                    <h6 style="color: green;">Hi - <?php echo $_SESSION['email']; ?></h6>
+                    <a href="#" id="logout">&nbsp;&nbsp; logout</a>
+
+                <?php
+                } else {
+                ?>
+
+                    <li class="nav-item">
+                        <button class="btn btn-success" href="#" name="login" id="login" data-toggle="modal" data-target="#loginmodal">Login</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-success" href="#" name="signup" id="signup" data-toggle="modal" data-target="#signupmodal">Signup</button>
+                    </li>
+
+                <?php
+                }
+                ?>
+            </ul>
         </div>
 
     </header>
@@ -117,6 +140,73 @@ $allItems = implode(",", $items);
             </form>
         </div>
     </div>
+
+
+
+    <div class="footer">
+        <div class="section">
+            <ul class="nav justify-content-right">
+                <li>
+                    <h6><i class="fab fa-cc-visa fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+                </li>
+                <li>
+                    <h6><i class="fab fa-cc-paypal fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+                </li>
+                <li>
+                    <h6><i class="fab fa-cc-mastercard fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+                </li>
+                <li>
+                    <h6><i class="fab fa-cc-amazon-pay fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+                </li>
+                <li>
+                    <h6>and 200<i class="fas fa-plus fa-xs"></i>&nbsp;&nbsp;more</h6>
+                </li>
+            </ul>
+            <hr>
+        </div>
+
+        <div class="footer-content">
+
+            <div class="footer-section">
+                <h5>About Us</h5>
+                <br>
+                <p>Bringing you the latest and exlusive games with the best possible deals</p>
+
+            </div>
+
+            <div class="footer-section">
+                <h5>Contact Us</h5>
+                <br>
+                <div class="contact">
+                    <span><i class="fas fa-phone-alt"></i>&nbsp;&nbsp;8668612283</span>
+                    <br>
+                    <span><i class="far fa-envelope"></i>&nbsp;&nbsp;melrick1611@hotmail.com<br></span>
+
+                    <br>
+                    <a href="#"><i class="fab fa-facebook fa-lg"></i>&nbsp;&nbsp;</a>
+                    <a href="#"><i class="fab fa-instagram fa-lg"></i>&nbsp;&nbsp;</a>
+                    <a href="#"><i class="fab fa-twitter fa-lg"></i>&nbsp;&nbsp;</a>
+                    <a href="#"><i class="fab fa-youtube fa-lg"></i>&nbsp;&nbsp;</a>
+                </div>
+
+            </div>
+            <div class="footer-section">
+                <h5>Download the App<h5>
+                        <br>
+                        <div class="download">
+                            <a href="#"><i class="fab fa-google-play fa-lg">&nbsp;Google Play&nbsp;&nbsp;</i></a>
+                            <a href="#"><i class="fab fa-apple fa-lg">&nbsp;Apple Store&nbsp;&nbsp;</i></a>
+
+                        </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom ">
+            &copy;coderick
+        </div>
+
+    </div>
+
 
 
 
