@@ -44,7 +44,7 @@ require 'config.php';
                 if (isset($_SESSION["email"])) {
                 ?>
 
-                    <h6 style="color: green;">Hi - <?php echo $_SESSION['email']; ?></h6>
+                    <h6>Hi - <?php echo $_SESSION['email']; ?></h6>
                     <a href="#" id="logout">&nbsp;&nbsp; logout</a>
                 <?php
                 } else {
@@ -66,7 +66,7 @@ require 'config.php';
     </header>
 
 
-    <h3 style="color: yellow;" class="text-center ">Cart!</h3>
+
 
     <ul class="nav justify-content-end">
         <li class="nav-item ">
@@ -79,6 +79,7 @@ require 'config.php';
             <a class="nav-link active" href="cart.php"><i class="fas fa-shopping-cart"></i>Cart<span id="cart-item" class="badge badge-danger"></span></a>
         </li>
     </ul>
+    <hr color="white" width="96%">
     <br>
     <br>
 
@@ -136,7 +137,7 @@ require 'config.php';
                                     <td><?= $row['product_type']; ?></td>
                                     <td><i class="fas fa-rupee-sign"></i>&nbsp;<?= number_format($row['product_price']); ?></td>
                                     <input type="hidden" class="product_price" value="<?= $row['product_price'] ?>">
-                                    <td><input type="number" class="form-control itemqty" value="<?= $row['product_quantity']; ?>" style="width: 75px;"></td>
+                                    <td><input type="number" min="1" class="form-control itemqty" value="<?= $row['product_quantity']; ?>" style="width: 75px;"></td>
                                     <td><i class="fas fa-rupee-sign"></i>&nbsp;<?= number_format($row['total_price']); ?></td>
                                     <td>
                                         <a href="action.php?remove=<?= $row['cart_id']; ?>" onclick="return confirm('Do you want to remove the item from your cart?')" class="text-danger"><i class="fas fa-trash-alt"></i></a>
@@ -247,8 +248,15 @@ require 'config.php';
 
             </div>
         </div>
+    </div>
 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
+    <div id="foot">
         <div class="footer">
             <div class="section">
                 <ul class="nav justify-content-right">
@@ -312,144 +320,144 @@ require 'config.php';
             </div>
 
         </div>
+    </div>
 
 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-
-        <script>
-            $(document).ready(function() {
-
-
-                $('#signup_button').click(function() {
-
-                    var formData = new FormData($('#myformRegister')[0]);
-
-                    if (formData.get('name') != '' && formData.get('email') != '' && formData.get('address') != '' && formData.get('password') != '') {
-                        $.ajax({
-                            url: "signup.php",
-                            method: "POST",
-                            data: {
-                                name: formData.get('name'),
-                                email: formData.get('email'),
-                                address: formData.get('address'),
-                                password: formData.get('password')
-                            },
-                            success: function(data) {
-                                if (data == 'No') {
-                                    alert("incomplete data");
-                                } else {
-                                    $('#signupmodal').hide();
-                                    location.reload();
-                                    alert("you have successfully signed up! Login to start shopping");
-                                }
-
-                            }
-                        });
-                    } else {
-                        alert("Incomplete Data");
-                    }
-                });
+    <script>
+        $(document).ready(function() {
 
 
-                $('#login_button').click(function() {
-                    var email = $('#email').val();
-                    var password = $('#password').val();
-                    if (email != '' && password != '') {
-                        $.ajax({
-                            url: "login.php",
-                            method: "POST",
-                            data: {
-                                email: email,
-                                password: password
-                            },
-                            success: function(data) {
-                                if (data == 'No') {
-                                    location.reload();
-                                    alert("Wrong Data");
+            $('#signup_button').click(function() {
 
-                                } else {
-                                    $('#loginmodal').hide();
-                                    location.reload();
-                                    alert("have fun shopping!");
-                                }
+                var formData = new FormData($('#myformRegister')[0]);
 
-                            }
-                        });
-
-
-                    } else {
-                        alert("Both fields are required");
-                    }
-                });
-
-                $("#logout").click(function() {
-                    var action = "logout";
+                if (formData.get('name') != '' && formData.get('email') != '' && formData.get('address') != '' && formData.get('password') != '') {
                     $.ajax({
-                        url: "logout.php",
+                        url: "signup.php",
                         method: "POST",
                         data: {
-                            action: action
+                            name: formData.get('name'),
+                            email: formData.get('email'),
+                            address: formData.get('address'),
+                            password: formData.get('password')
                         },
                         success: function(data) {
-                            location.reload();
-                        }
+                            if (data == 'No') {
+                                alert("incomplete data");
+                            } else {
+                                $('#signupmodal').hide();
+                                location.reload();
+                                alert("you have successfully signed up! Login to start shopping");
+                            }
 
-
-                    })
-                });
-
-                $(".itemqty").on('change', function() {
-                    var $el = $(this).closest('tr');
-
-                    var cart_id = $el.find(".cart_id").val();
-                    var product_price = $el.find(".product_price").val();
-                    var itemqty = $el.find(".itemqty").val();
-                    location.reload(true);
-                    $.ajax({
-
-                        url: 'action.php',
-                        method: 'POST',
-                        cache: false,
-                        data: {
-                            itemqty: itemqty,
-                            cart_id: cart_id,
-                            product_price: product_price,
-
-                        },
-                        success: function(response) {
-
-                            console.log(response);
-
-                        }
-
-
-                    });
-
-
-                });
-
-                load_cart_item_number();
-
-                function load_cart_item_number() {
-
-                    $.ajax({
-                        url: 'addtocart.php',
-                        method: 'GET',
-                        data: {
-                            cartItem: "cart_item"
-                        },
-                        success: function(response) {
-                            $("#cart-item").html(response);
                         }
                     });
-
+                } else {
+                    alert("Incomplete Data");
                 }
+            });
+
+
+            $('#login_button').click(function() {
+                var email = $('#email').val();
+                var password = $('#password').val();
+                if (email != '' && password != '') {
+                    $.ajax({
+                        url: "login.php",
+                        method: "POST",
+                        data: {
+                            email: email,
+                            password: password
+                        },
+                        success: function(data) {
+                            if (data == 'No') {
+                                location.reload();
+                                alert("Wrong Data");
+
+                            } else {
+                                $('#loginmodal').hide();
+                                location.reload();
+                                alert("have fun shopping!");
+                            }
+
+                        }
+                    });
+
+
+                } else {
+                    alert("Both fields are required");
+                }
+            });
+
+            $("#logout").click(function() {
+                var action = "logout";
+                $.ajax({
+                    url: "logout.php",
+                    method: "POST",
+                    data: {
+                        action: action
+                    },
+                    success: function(data) {
+                        location.reload();
+                    }
+
+
+                })
+            });
+
+            $(".itemqty").on('change', function() {
+                var $el = $(this).closest('tr');
+
+                var cart_id = $el.find(".cart_id").val();
+                var product_price = $el.find(".product_price").val();
+                var itemqty = $el.find(".itemqty").val();
+                location.reload(true);
+                $.ajax({
+
+                    url: 'action.php',
+                    method: 'POST',
+                    cache: false,
+                    data: {
+                        itemqty: itemqty,
+                        cart_id: cart_id,
+                        product_price: product_price,
+
+                    },
+                    success: function(response) {
+
+                        console.log(response);
+
+                    }
+
+
+                });
+
 
             });
-        </script>
+
+            load_cart_item_number();
+
+            function load_cart_item_number() {
+
+                $.ajax({
+                    url: 'addtocart.php',
+                    method: 'GET',
+                    data: {
+                        cartItem: "cart_item"
+                    },
+                    success: function(response) {
+                        $("#cart-item").html(response);
+                    }
+                });
+
+            }
+
+        });
+    </script>
 
 
 </body>

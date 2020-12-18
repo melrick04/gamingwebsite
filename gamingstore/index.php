@@ -44,7 +44,7 @@ require 'config.php';
                 if (isset($_SESSION["email"])) {
                 ?>
 
-                    <h6 style="color: green;">Hi - <?php echo $_SESSION['email']; ?></h6>
+                    <h6>Hi - <?php echo $_SESSION['email']; ?></h6>
                     <a href="#" id="logout">&nbsp;&nbsp; logout</a>
 
                 <?php
@@ -77,6 +77,8 @@ require 'config.php';
             <a class="nav-link" href="cart.php"><i class="fas fa-shopping-cart"></i>Cart<span id="cart-item" class="badge badge-danger"></span></a>
         </li>
     </ul>
+    <br>
+
 
 
     <div id="mycarousel" class="carousel slide" data-ride="carousel">
@@ -290,6 +292,11 @@ require 'config.php';
         </div>
     </div>
 
+    <br>
+    <br>
+    <br>
+    <br>
+
     <div class="footer">
         <div class="section">
             <ul class="nav justify-content-right">
@@ -311,6 +318,7 @@ require 'config.php';
             </ul>
             <hr>
         </div>
+
 
         <div class="footer-content">
 

@@ -44,7 +44,7 @@ require 'config.php';
                 if (isset($_SESSION["email"])) {
                 ?>
 
-                    <h6 style="color: green;">Hi - <?php echo $_SESSION['email']; ?></h6>
+                    <h6>Hi - <?php echo $_SESSION['email']; ?></h6>
                     <a href="#" id="logout">&nbsp;&nbsp; logout</a>
 
                 <?php
@@ -70,16 +70,17 @@ require 'config.php';
             <a class="nav-link active" href="index.php">Home</a>
         </li>
         <li class="nav-item ">
-            <a class="nav-link" href="#products">Products</a>
+            <a class="nav-link" href="product.php">Products</a>
         </li>
         <li class="nav-item ">
             <a class="nav-link" href="cart.php"><i class="fas fa-shopping-cart"></i>Cart<span id="cart-item" class="badge badge-danger"></span></a>
         </li>
     </ul>
+    <hr color="white" width="98%">
 
 
     <div class="container-fluid">
-        <div class="products" id="products"></div>
+
         <div class="row">
             <div class="col-lg-3">
                 <h5 style="color: white;">Filter Products</h5>
@@ -263,6 +264,13 @@ require 'config.php';
             </div>
         </div>
     </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
 
     <div class="footer">
         <div class="section">

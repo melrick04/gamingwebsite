@@ -58,7 +58,7 @@ $allItems = implode(",", $items);
                 if (isset($_SESSION["email"])) {
                 ?>
 
-                    <h6 style="color: green;">Hi - <?php echo $_SESSION['email']; ?></h6>
+                    <h6>Hi - <?php echo $_SESSION['email']; ?></h6>
                     <a href="#" id="logout">&nbsp;&nbsp; logout</a>
 
                 <?php
@@ -141,7 +141,11 @@ $allItems = implode(",", $items);
         </div>
     </div>
 
-
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
     <div class="footer">
         <div class="section">

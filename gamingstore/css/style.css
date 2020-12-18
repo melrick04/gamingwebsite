@@ -12,13 +12,32 @@ body {
   width: 140px;
 }
 
+.navbar h6 {
+  color: #2be3d1;
+}
+
+.navbar a {
+  color: #e83f50;
+}
+
 .carousel-inner img {
   width: 100vh;
   height: 86vh;
+  border-top: 1px solid rgb(179, 231, 37);
+  border-bottom: 1px solid rgb(179, 231, 37);
+  border-radius: 25px;
 }
 
 .container-fluid {
   color: black;
+}
+
+.container {
+  height: 100%;
+}
+
+#wrapper h2 {
+  border-bottom: 1px solid rgb(238, 255, 0);
 }
 
 .table {
