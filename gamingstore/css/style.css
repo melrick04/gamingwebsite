@@ -32,6 +32,16 @@ body {
   color: black;
 }
 
+.container-fluid #order1 {
+  text-align: center;
+  background-color: violet;
+}
+
+.container-fluid #order1 a {
+  text-align: center;
+  color: white;
+}
+
 .container {
   height: 100%;
 }

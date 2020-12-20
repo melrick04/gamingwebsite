@@ -66,10 +66,10 @@ $allItems = implode(",", $items);
                 ?>
 
                     <li class="nav-item">
-                        <button class="btn btn-success" href="#" name="login" id="login" data-toggle="modal" data-target="#loginmodal">Login</button>
+                        <a style="color: white;" class="btn btn-success" href="index.php">Login</a>
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-success" href="#" name="signup" id="signup" data-toggle="modal" data-target="#signupmodal">Signup</button>
+                        <a style="color: white;" class="btn btn-success" href="index.php">Signup</a>
                     </li>
 
                 <?php
@@ -131,15 +131,28 @@ $allItems = implode(",", $items);
                             <option value="upi">UPI</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <input class="btn btn-block btn-success <?= ($grand_total > 1) ? "" : "disabled"; ?>" type="submit" name="submit" value="Confirm Order!">
-                    </div>
+                    <?php
+                    if (isset($_SESSION["email"])) {
+                    ?>
+                        <div class="form-group">
+                            <input class="btn btn-block btn-success <?= ($grand_total > 1) ? "" : "disabled"; ?>" type="submit" name="submit" value="Confirm Order!">
+                        </div>
+                    <?php
+                    } else {
+                    ?>
+                        <div id="order1">
+                            <a>Login/Register to place order!</a>
+                        </div>
+                    <?php
+                    }
+                    ?>
 
             </div>
 
             </form>
         </div>
     </div>
+
 
     <br>
     <br>
@@ -220,6 +233,24 @@ $allItems = implode(",", $items);
 
     <script>
         $(document).ready(function() {
+
+
+            $("#logout").click(function() {
+                var action = "logout";
+                $.ajax({
+                    url: "logout.php",
+                    method: "POST",
+                    data: {
+                        action: action
+                    },
+                    success: function(data) {
+                        location.reload();
+                    }
+
+
+                })
+            });
+
 
             $("#placeOrder").submit(function(e) {
                 e.preventDefault();

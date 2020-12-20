@@ -86,6 +86,7 @@ if (isset($_GET['cartItem']) && isset($_GET['cartItem']) == 'cart_item') {
     $stmt->store_result();
     $rows = $stmt->num_rows;
 
+
     echo $rows;
 }
 

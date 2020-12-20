@@ -190,7 +190,7 @@ require 'config.php';
                         <button class="btn btn-danger btn-block" type="button" name="login_button" id="login_button">Sign in</button>
                     </div>
                     <div class="link login-link text-center" style="color:black">Not yet a member?
-                        <a href="signup-user.php">Signup now</a>
+                        <a href="#" data-toggle="modal" data-target="#signupmodal">Signup now</a>
                     </div>
 
 
